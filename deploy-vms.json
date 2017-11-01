@@ -44,10 +44,10 @@
     "cycleName": "cycleserver",
     "cycleNic": "cyclenic",
     "cycleNsg": "cyclensg",
-
-    "cycleInstallScript": ["[uri(deployment().properties.templateLink.uri, 'cyclecloud_install.sh')]"],
+    "cycleInstallScript": [
+      "[uri(deployment().properties.templateLink.uri, 'cyclecloud_install.sh')]"
+    ],
     "cycleInstallCommand": "[concat('bash cyclecloud_install.sh ', parameters('cycleDownloadUri'))]",
-
     "networkApiVersion": "2017-06-01",
     "computeApiVersion": "2017-03-30"
   },
@@ -232,8 +232,7 @@
             }
           }
         ],
-        "dnsSettings": {
-        },
+        "dnsSettings": {},
         "enableAcceleratedNetworking": false,
         "enableIPForwarding": false,
         "networkSecurityGroup": {
@@ -241,10 +240,8 @@
         },
         "primary": true
       },
-      "dependsOn": [
-      ]
+      "dependsOn": []
     }
   ],
-  "outputs": {
-  }
+  "outputs": {}
 }
