@@ -43,7 +43,7 @@
     "cyclevmSize": "Standard_D8s_v3",
     "cycleName": "cycleserver",
     "cycleNic": "cycle-nic",
-    "cycle_nsg_name": "cycle-nsg",
+    "cycleNsg": "cycle-nsg",
 
     "cycleInstallScript": ["[uri(deployment().properties.templateLink.uri, 'cyclecloud_install.sh')]"],
     "cycleInstallCommand": "[concat('bash cyclecloud_install.sh ', parameters('cycleDownloadUri'))]",
@@ -54,7 +54,7 @@
   "resources": [
     {
       "type": "Microsoft.Network/networkSecurityGroups",
-      "name": "cycle-nsg",
+      "name": "[variables('cycle-nsg')]",
       "apiVersion": "[variables('networkApiVersion')]",
       "location": "[variables('resourceLocation')]",
       "properties": {
@@ -107,40 +107,6 @@
         ]
       },
       "dependsOn": []
-    },
-    {
-      "type": "Microsoft.Network/networkInterfaces",
-      "name": "[variables('cycleNic')]",
-      "apiVersion": "[variables('networkApiVersion')]",
-      "location": "[variables('resourceLocation')]",
-      "properties": {
-        "ipConfigurations": [
-          {
-            "name": "ipconfig1",
-            "properties": {
-              "privateIPAllocationMethod": "Dynamic",
-              "publicIPAddress": {
-                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('cycleIPName'))]"
-              },
-              "subnet": {
-                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnetName'), parameters('subnetName'))]"
-              },
-              "primary": true,
-              "privateIPAddressVersion": "IPv4"
-            }
-          }
-        ],
-        "dnsSettings": {
-        },
-        "enableAcceleratedNetworking": false,
-        "enableIPForwarding": false,
-        "networkSecurityGroup": {
-          "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('cycle_nsg_name'))]"
-        },
-        "primary": true
-      },
-      "dependsOn": [
-      ]
     },
     {
       "type": "Microsoft.Compute/virtualMachines",
@@ -231,7 +197,7 @@
     },
     {
       "type": "Microsoft.Network/publicIPAddresses",
-      "name": "cycleserver_ip",
+      "name": "[parameters('cycleIPName')]",
       "apiVersion": "[variables('networkApiVersion')]",
       "location": "[variables('resourceLocation')]",
       "properties": {
@@ -243,6 +209,40 @@
         }
       },
       "dependsOn": []
+    },
+    {
+      "type": "Microsoft.Network/networkInterfaces",
+      "name": "[variables('cycleNic')]",
+      "apiVersion": "[variables('networkApiVersion')]",
+      "location": "[variables('resourceLocation')]",
+      "properties": {
+        "ipConfigurations": [
+          {
+            "name": "ipconfig1",
+            "properties": {
+              "privateIPAllocationMethod": "Dynamic",
+              "publicIPAddress": {
+                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('cycleIPName'))]"
+              },
+              "subnet": {
+                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnetName'), parameters('subnetName'))]"
+              },
+              "primary": true,
+              "privateIPAddressVersion": "IPv4"
+            }
+          }
+        ],
+        "dnsSettings": {
+        },
+        "enableAcceleratedNetworking": false,
+        "enableIPForwarding": false,
+        "networkSecurityGroup": {
+          "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('cycleNsg'))]"
+        },
+        "primary": true
+      },
+      "dependsOn": [
+      ]
     }
   ],
   "outputs": {
