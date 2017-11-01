@@ -42,8 +42,8 @@
     "namingInfix": "[toLower(take(uniqueString(resourceGroup().id), 6))]",
     "cyclevmSize": "Standard_D8s_v3",
     "cycleName": "cycleserver",
-    "cycleNic": "cycle-nic",
-    "cycleNsg": "cycle-nsg",
+    "cycleNic": "cyclenic",
+    "cycleNsg": "cyclensg",
 
     "cycleInstallScript": ["[uri(deployment().properties.templateLink.uri, 'cyclecloud_install.sh')]"],
     "cycleInstallCommand": "[concat('bash cyclecloud_install.sh ', parameters('cycleDownloadUri'))]",
@@ -121,7 +121,7 @@
           "imageReference": {
             "publisher": "OpenLogic",
             "offer": "CentOS",
-            "sku": "7.3",
+            "sku": "7.1",
             "version": "latest"
           },
           "osDisk": {
@@ -163,7 +163,7 @@
         "networkProfile": {
           "networkInterfaces": [
             {
-              "id": "[resourceId('Microsoft.Network/networkInterfaces', variables('cycleNic'), variables('namingInfix')]"
+              "id": "[resourceId('Microsoft.Network/networkInterfaces', variables('cycleNic')]"
             }
           ]
         }
@@ -192,7 +192,7 @@
         }
       ],
       "dependsOn": [
-        "[resourceId('Microsoft.Network/networkInterfaces', variables('cycleNic'), variables('namingInfix'))]"
+        "[resourceId('Microsoft.Network/networkInterfaces', variables('cycleNic'))]"
       ]
     },
     {
@@ -212,7 +212,7 @@
     },
     {
       "type": "Microsoft.Network/networkInterfaces",
-      "name": "[concat(variables('cycleNic'), variables('namingInfix'))]",
+      "name": "[variables('cycleNic')]",
       "apiVersion": "[variables('networkApiVersion')]",
       "location": "[variables('resourceLocation')]",
       "properties": {
