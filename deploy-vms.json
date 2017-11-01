@@ -25,7 +25,7 @@
     },
     "cycleDownloadUri": {
       "maxLength": 256,
-      "type": "securestring",
+      "type": "string",
       "metadata": {
         "description": "Cycle download URI"
       }
@@ -170,7 +170,7 @@
               "sourceAddressPrefix": "Internet",
               "destinationAddressPrefix": "VirtualNetwork",
               "access": "Allow",
-              "priority": 2000,
+              "priority": 3000,
               "direction": "Inbound",
               "sourceAddressPrefixes": [],
               "destinationAddressPrefixes": []
@@ -185,7 +185,7 @@
               "sourceAddressPrefix": "Internet",
               "destinationAddressPrefix": "VirtualNetwork",
               "access": "Allow",
-              "priority": 1000,
+              "priority": 2000,
               "direction": "Inbound",
               "sourceAddressPrefixes": [],
               "destinationAddressPrefixes": []
