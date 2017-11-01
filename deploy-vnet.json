@@ -34,9 +34,21 @@
             }
           },
           {
+            "name": "admin",
+            "properties": {
+              "addressPrefix": "10.0.2.0/28"
+            }
+          },
+          {
+            "name": "user",
+            "properties": {
+              "addressPrefix": "10.0.3.0/24"
+            }
+          },
+          {
             "name": "compute",
             "properties": {
-              "addressPrefix": "10.0.2.0/22"
+              "addressPrefix": "10.0.4.0/22"
             }
           }
         ],
