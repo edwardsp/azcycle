@@ -11,7 +11,6 @@
     }
   },
   "variables": {
-    "namingInfix": "[toLower(take(uniqueString(resourceGroup().id), 6))]",
     "resourceLocation": "[resourceGroup().location]",
     "networkApiVersion": "2017-06-01"
   },
@@ -42,10 +41,6 @@
           }
         ],
         "virtualNetworkPeerings": []
-      },
-      "dependsOn": []
-    }
-        ]
       },
       "dependsOn": []
     }
