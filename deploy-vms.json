@@ -40,7 +40,7 @@
   "variables": {
     "resourceLocation": "[resourceGroup().location]",
     "namingInfix": "[toLower(take(uniqueString(resourceGroup().id), 6))]",
-    "cyclevmSize": "Standard_D8s_v3",
+    "cyclevmSize": "Standard_DS4_v2",
     "cycleName": "cycleserver",
     "cycleNic": "cyclenic",
     "cycleNsg": "cyclensg",
