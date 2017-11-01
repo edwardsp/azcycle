@@ -6,7 +6,14 @@
       "maxLength": 32,
       "type": "string",
       "metadata": {
-        "description": "Name of the VNET to add the VMs in"
+        "description": "Name of the VNET to put the cycle server in"
+      }
+    },
+    "subnetName": {
+      "maxLength": 32,
+      "type": "string",
+      "metadata": {
+        "description": "Name of the subnet to put the cycle server in"
       }
     },
     "cycleIPName": {
@@ -32,12 +39,11 @@
   },
   "variables": {
     "resourceLocation": "[resourceGroup().location]",
-
+    "namingInfix": "[toLower(take(uniqueString(resourceGroup().id), 6))]",
     "cyclevmSize": "Standard_D8s_v3",
     "cycleName": "cycleserver",
     "cycleNic": "cycle-nic",
     "cycle_nsg_name": "cycle-nsg",
-    "cycle_subnet": "cycle",
 
     "cycleInstallScript": ["[uri(deployment().properties.templateLink.uri, 'cyclecloud_install.sh')]"],
     "cycleInstallCommand": "[concat('bash cyclecloud_install.sh ', parameters('cycleDownloadUri'))]",
@@ -134,6 +140,21 @@
       ]
     },
     {
+      "type": "Microsoft.Network/publicIPAddresses",
+      "name": "cycleserver_ip",
+      "apiVersion": "[variables('networkApiVersion')]",
+      "location": "[variables('resourceLocation')]",
+      "properties": {
+        "publicIPAddressVersion": "IPv4",
+        "publicIPAllocationMethod": "Static",
+        "idleTimeoutInMinutes": 4,
+        "dnsSettings": {
+          "domainNameLabel": "[concat('cycleserver', variables('namingInfix'))]"
+        }
+      },
+      "dependsOn": []
+    },
+    {
       "type": "Microsoft.Network/networkSecurityGroups",
       "name": "cycle-nsg",
       "apiVersion": "[variables('networkApiVersion')]",
@@ -204,7 +225,7 @@
                 "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('cycleIPName'))]"
               },
               "subnet": {
-                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnetName'), variables('cycle_subnet'))]"
+                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnetName'), parameters('subnetName'))]"
               },
               "primary": true,
               "privateIPAddressVersion": "IPv4"
