@@ -1,6 +1,11 @@
 # azcycle
 Cycle Server on Azure scripts and templates
 
+# Deploy to VNET
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/httpss%3A%2F%2Fraw.githubusercontent.com%2Fedwardsp%2Fazcycle%2Fmaster%2Fdeploy-vms.json" target="_blank">
+    <img src="http://azuredeploy.net/deploybutton.png" />
+</a>
+
 # Create Azure Resources
 
 * Clone the repo 
