@@ -45,15 +45,14 @@ $cycle_root/cycle_server status
 mkdir -p ~/.ssh
 
 # Generate the key pair without passphrase
-rm -f ~/.ssh/cyclecloud*
-ssh-keygen -f ~/.ssh/cyclecloud -t rsa -b 2048 -P ""
-
-# Rename the private key to have a .pem extension
-mv ~/.ssh/cyclecloud ~/.ssh/cyclecloud.pem
+ssh-keygen -f /home/cycleadmin/.ssh/cyclecloud -t rsa -b 2048 -P ""
+mv /home/cycleadmin/.ssh/cyclecloud /home/cycleadmin/.ssh/cyclecloud.pem
+chown cycleadmin:cycleadmin /home/cycleadmin/.ssh/cyclecloud*
+chmod 600 /home/cycleadmin/.ssh/cyclecloud*
 
 mkdir -p $cycle_root/.ssh
 chown cycle_server:cycle_server $cycle_root/.ssh
-cp ~/.ssh/cyclecloud.pem $cycle_root/.ssh/cyclecloud.pem
+cp /home/cycleadmin/.ssh/cyclecloud.pem $cycle_root/.ssh/cyclecloud.pem
 chmod 600 $cycle_root/.ssh/cyclecloud.pem
 chown cycle_server:cycle_server $cycle_root/.ssh/cyclecloud.pem
 
