@@ -54,7 +54,7 @@
   "resources": [
     {
       "type": "Microsoft.Network/networkSecurityGroups",
-      "name": "[variables('cycle-nsg')]",
+      "name": "[variables('cycleNsg')]",
       "apiVersion": "[variables('networkApiVersion')]",
       "location": "[variables('resourceLocation')]",
       "properties": {
