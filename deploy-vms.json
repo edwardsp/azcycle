@@ -117,7 +117,7 @@
           "type": "extensions",
           "name": "InstallCycle",
           "apiVersion": "[variables('computeApiVersion')]",
-          "location": "[resourceGroup().location]",
+          "location": "[variables('resourceLocation')]",
           "properties": {
             "publisher": "Microsoft.Azure.Extensions",
             "type": "CustomScript",
