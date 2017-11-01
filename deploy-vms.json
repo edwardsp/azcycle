@@ -212,7 +212,7 @@
     },
     {
       "type": "Microsoft.Network/networkInterfaces",
-      "name": "[variables('cycleNic')]",
+      "name": "[concat(variables('cycleNic'), variables('namingInfix'))]",
       "apiVersion": "[variables('networkApiVersion')]",
       "location": "[variables('resourceLocation')]",
       "properties": {
