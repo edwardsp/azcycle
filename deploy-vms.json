@@ -192,7 +192,7 @@
         }
       ],
       "dependsOn": [
-        "[resourceId('Microsoft.Network/networkInterfaces', variables('cycleNic')]"
+        "[resourceId('Microsoft.Network/networkInterfaces', variables('cycleNic'))]"
       ]
     },
     {
