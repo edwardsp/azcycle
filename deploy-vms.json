@@ -41,9 +41,9 @@
     "resourceLocation": "[resourceGroup().location]",
     "namingInfix": "[toLower(take(uniqueString(resourceGroup().id), 6))]",
     "cyclevmSize": "Standard_DS4_v2",
-    "cycleName": "cycleserver",
-    "cycleNic": "cyclenic",
-    "cycleNsg": "cyclensg",
+    "cycleName": "ptechcycleserver",
+    "cycleNic": "ptechcyclenic",
+    "cycleNsg": "ptechcyclensg",
     "cycleInstallScript": [
       "[uri(deployment().properties.templateLink.uri, 'cyclecloud_install.sh')]"
     ],
